@@ -8,13 +8,18 @@
 #'           > rnorm_polarTrig()
 #'           [1]  0.3101949 -0.5247283
 rnorm_polarTrig <- function(n = 1) {
-  u1 <- runif_congruencial()
-  r2 <- -2 * log(u1)
-  u2 <- runif_congruencial()
-  theta <- 2 * pi * u2
-  x <- sqrt(r2) * cos(theta)
-  y <- sqrt(r2) * sin(theta)
-  resultado <- c(x, y)
+  resultado <- c()
+  i <- 1
+  while (i <= n) {
+    u1 <- runif_congruencial()
+    r2 <- -2 * log(u1)
+    u2 <- runif_congruencial()
+    theta <- 2 * pi * u2
+    x <- sqrt(r2) * cos(theta)
+    y <- sqrt(r2) * sin(theta)
+    resultado <- append(resultado, c(x, y))
+    i <- i + 1
+  }
   return(resultado)
 }
 
@@ -29,23 +34,20 @@ rnorm_polarTrig <- function(n = 1) {
 #'
 #' @examples > set.seed(30)
 #'           > rnorm_polarDireto()
-#'           [1] 0.3461371 0.3508665
-rnorm_polarDireto <- function(n = 1) {
-  resultado <- c()
-  i = 1
-  while (i <= n) {
-    u1 <- runif_congruencial()
-    u2 <- runif_congruencial()
-    v1 <- 2 * u1 - 1
-    v2 <- 2 * u2 - 1
-    u <- v1 ^ 2 + v2 ^ 2
-    if (u > 1) {
-      next()
+#'           [1] 0.7975119 0.5323805
+rnorm_polarDireto <- function(n=1){
+  X <- matrix(0, ncol = 2, nrow = n)
+  for (i in 1:n){
+    U <- runif(2)
+    V <- 2 * U - 1
+    R2 <- sum(V^2)
+    while (R2 > 1){
+      U <- runif(2)
+      V <- 2 * U - 1
+      R2 <- sum(V^2)
     }
-    i <- i + 1
-    x <- sqrt(-2 * log(u) / u) * v1
-    y <- sqrt(-2 * log(u) / u) * v2
-    resultado <- append(resultado, c(x, y))
+    Y <- sqrt(-2 * log(R2) / R2)
+    X[i, ] <- Y * V
   }
-  return(resultado)
+  as.vector(X)
 }
