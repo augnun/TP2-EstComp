@@ -1,4 +1,11 @@
 pnorm_polar <- function(x,n=10^5){
+  resultado <- list(length(x))
+  fda <- numeric(length(x))
   t <- rnorm_polarDireto(n)
-  sum(as.integer(as.logical(t[t <= pnorm(x)])))/(2*n)
+  mean(ifelse(t<x,1,0))
+  for(i in 1:length(x)){
+    fda[i] <- mean(ifelse(t<x[i],1,0))
+    resultado[i] <- paste(format(fda[i],digits = 6),"\newline(",format(fda[i]-pnorm(x),digits=3),")&",sep="")
+  }
+  return(resultado)
 }

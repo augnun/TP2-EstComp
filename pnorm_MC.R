@@ -15,9 +15,12 @@
 pnorm_MC <- function(x, n = 10^6){
   t <- runif(n)
   fda <- numeric(length(x))
+  resultado <- list(length(x))
   for(i in 1:length(x)){
     g <- x[i]*exp(-0.5*(x[i]*t)^2)
     fda[i] <- mean(g)/sqrt(2*pi) + 0.5
+    resultado[i] <- paste(format(fda[i],digits = 6),"\newline(",format(fda[i]-pnorm(x),digits=3),")&",sep="")
   }
-  return(fda)
+  # resultado <- paste(fda,"\newline(",format(pnorm_MC(x)-pnorm(x),digits=3),")")
+  return(resultado)
 }
