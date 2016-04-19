@@ -1,3 +1,13 @@
+#' Title pnorm_polar
+#'
+#' @param x vetor de quantis da distribuição
+#' @param n tamanho do vetor. Padrão: n = 10^5
+#'
+#' @return uma lista com a densidade acumulada empírica e a diferença entre a 
+#'          dens. acumulada encontrada pelo método e pnorm() do R
+#' @export
+#'
+#' @examples
 pnorm_polar <- function(x,n=10^5){
   resultado <- list(length(x))
   fda <- numeric(length(x))

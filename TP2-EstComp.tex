@@ -62,6 +62,9 @@
 \usepackage{amsmath}			% amsmath
 \usepackage{pdflscape}				% Páginas em formato paisagem
 \usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{listings}
+%\usepackage{abntex2}
 % ---
 \graphicspath{{imagens/}}
 % ---
@@ -127,7 +130,7 @@
 % --- 
 
 % ---
-% compila o indice
+% compila o índice
 % ---
 \makeindex
 % ---
@@ -177,7 +180,7 @@
 
 % resumo em português
 \begin{resumoumacoluna}
-    Este Trabalho Prático implementa um gerador variáveis aleatórias Uniformes no intervalo (0,1) utilizando o Método Congruencial em (\ref{metodo:runif_cong}), implementa a geração de variáveis aleatórias Normais padrão utilizando o Método polar em (\ref{metodo:rnorm_polar}), e constrói uma tabela para as probabilidades acumuladas da N(0,1) utilizando duas implementações: o Método de Integração de Monte-Carlo em (\ref{tabela:pnorm_MC}) e a Probabilidade Acumulada Empírica obtida em (\ref{gerador:polar}) no item (\ref{tabela:pnorm_polar})
+    Este Trabalho Prático implementa um gerador variáveis aleatórias Uniformes no intervalo (0,1) utilizando o Método Congruencial em (\ref{metodo:runif_cong}), implementa a geração de variáveis aleatórias Normais padrão utilizando o Método polar em (\ref{metodo:rnorm_polar}), e constrói uma tabela para as probabilidades acumuladas da N(0,1) utilizando duas implementações: o Método de Integração de Monte-Carlo em (\ref{tabela:pnorm_MC}) e a Probabilidade Acumulada Empírica obtida em (\ref{gerador:polar}) no item (\ref{tabela:pnorm_polar}). Os resultados são discutidos em \ref{cap:conclusoes}.
  
  \vspace{\onelineskip}
  
@@ -229,7 +232,7 @@
     
     Um outro método para geração de variáveis aleatórias estudado neste Trabalho Prático é o Método Polar\footnote{Em particular, utilizamos aqui o que se chama de Método Polar de Marsaglia: ver }: este método gera pares de variáveis aleatórias contínuas utilizando uma transformação em coordenadas polares. Em particular, implementamos um gerador de variáveis aleatórias Normais padrão, e sua função é \textbf{rnorm\_polar()}. Em um segundo momento, a distribuição acumulada empírica utilizando este método também foi utilizada para gerar uma tabela dos quantis da Normal padrão, comparando-a com os resultados da função \textbf{pnorm()} do R.
     
-    As implementações, os resultados dos testes de hipóteses e sementes utilizados para verificar o ajustamento dos geradores encontram-se no Anexo A. As funções foram documentadas utilizando o pacote \textit{Roxygen} do R. Disponibilizamos um repositório no site github.com: (http://github.com/august-o/TP2-EstComp). Lá encontram-se todos os arquivos-fonte utilizados neste Trabalho Prático. O computador utilizado foi um Macbook Pro, Sistema Operacional OS X El Capitan (10.11.3), com processador Intel Core i5 de 2.4 GHz e 16 GB de memória RAM 1333 MHz DDR3. A versão do R utilizada foi a 3.2.4, com a IDE RStudio em sua versão 0.99.1130.  
+    As implementações, os resultados dos testes de hipóteses e sementes utilizados para verificar o ajustamento dos geradores encontram-se no Anexo A. As funções foram documentadas utilizando o pacote \textit{Roxygen} do R. Disponibilizamos um repositório no site github.com: \url{http://github.com/august-o/TP2-EstComp}. Lá encontram-se todos os arquivos-fonte utilizados neste Trabalho Prático. O computador utilizado foi um Macbook Pro, Sistema Operacional OS X El Capitan (10.11.3), com processador Intel Core i5 de 2.4 GHz e 16 GB de memória RAM 1333 MHz DDR3. A versão do R utilizada foi a 3.2.4, com a IDE RStudio em sua versão 0.99.1130.  
     
 \section{Gerador Congruencial para a variável aleatória Uniforme(0,1)}\label{metodo:runif_cong}
 \subsection{Teste de Uniformidade}
@@ -374,7 +377,7 @@
 \end{landscape}
     \section{Tabela de densidades acumuladas da Normal(0,1) usando a Densidade Acumulada Empírica da Transformação Polar de Marsaglia}
     
-        	As tabelas a seguir fornecem valores para os percentis (0,b) da Normal Padrão, ou seja, cada célula contém o valor de P(0 < Z < b) com $Z \sim Normal(0,1)$, e entre parênteses, o valor encontrado via Transformacão Polar menos o valor obtido pela pnorm() do R para o respectivo quantil.
+        	As tabelas a seguir fornecem valores para os percentis (0,b) da Normal Padrão, ou seja, cada célula contém o valor de P(0 < Z < b) com $Z \sim Normal(0,1)$, e entre parênteses, o valor encontrado via Transformação Polar menos o valor obtido pela pnorm() do R para o respectivo quantil.
         	\begin{landscape}
         	\begin{table}\footnotesize\label{tabela:pnorm_polar}
     		\begin{tabular}{c||p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}|p{18mm}}
@@ -419,7 +422,7 @@
     			1.6 & 0.94567\newline(0.000469)&0.94674\newline(0.001539)&0.947855\newline(0.002654)&0.948955\newline(0.003754)&0.950085\newline(0.004884)&0.95115\newline(0.005949)&0.952155\newline(0.006954)&0.953145\newline(0.007944)&0.95417\newline(0.008969)&0.95523\newline(0.010029)\\
     			\hline
         		\end{tabular}
-        		\caption{Densidade acumulada da Normal(0,1) em $(0,b)$ obtida via Transformação Polar de Marsaglia. Nos parênteses, o valor encontrado via Transf. Polar menos o valor obtido pela pnorm() do R para o respectivo quantil (continuação)}
+        		\caption{Densidade acumulada da Normal(0,1) em $(0,b)$ obtida via Transformação Polar de Marsaglia. Nos parênteses, o valor encontrado via Transformação Polar menos o valor obtido pela pnorm() do R para o respectivo quantil (continuação)}
         	\end{table}
 
 
@@ -449,7 +452,7 @@
     			
 
 \end{tabular}
-\caption{Densidade acumulada da Normal(0,1) em $(0,b)$ obtida via Transformação Polar de Marsaglia. Nos parênteses, o valor encontrado via Transf. Polar menos o valor obtido pela pnorm() do R para o respectivo quantil (continuação)}
+\caption{Densidade acumulada da Normal(0,1) em $(0,b)$ obtida via Transformação Polar de Marsaglia. Nos parênteses, o valor encontrado via Transformação Polar menos o valor obtido pela pnorm() do R para o respectivo quantil (continuação)}
 \end{table}
 
 \begin{table}\footnotesize
@@ -464,12 +467,150 @@
     			3.8 &0.99995\newline(2.23e-05)&0.999955\newline(2.73e-05)&0.999955\newline(2.73e-05)&0.999955\newline(2.73e-05)&0.99996\newline(3.23e-05)&0.99996\newline(3.23e-05)&0.99996\newline(3.23e-05)&0.99996\newline(3.23e-05)&0.999965\newline(3.73e-05)&0.999965\newline(3.73e-05)\\\hline
     			3.9 &0.999965\newline(1.31e-05)&0.999965\newline( 1.31e-05)&0.999965\newline(1.31e-05)&0.99997\newline(1.81e-05)&0.99997\newline(1.81e-05)&0.99997\newline(1.81e-05)&0.999975\newline(2.31e-05)&0.999975\newline(2.31e-05)&0.999975\newline(2.31e-05)&0.999975\newline(2.31e-05)\\
 \end{tabular}
-\caption{Densidade acumulada da Normal(0,1) em $(0,b)$ obtida via Transformação Polar de Marsaglia. Nos parênteses, o valor encontrado via Transf. Polar menos o valor obtido pela pnorm() do R para o respectivo quantil (continuação)}
+\caption{Densidade acumulada da Normal(0,1) em $(0,b)$ obtida via Transformação Polar de Marsaglia. Nos parênteses, o valor encontrado via Transformação Polar menos o valor obtido pela pnorm() do R para o respectivo quantil (continuação)}
 
 \end{table}
         	\end{landscape}
         	
-\section{Conclusões}
+\section{Conclusões}\label{cap:conclusoes}
 \subsection{Sobre o Gerador Congruencial para a Uniforme (0,1)}
-	A significância dos testes foi alta, o que significa que o gerador é eficaz em gerar uma amostra da U(0,1). Comentários sobre a baixa eficiência de implementação de quase todo algoritmo em R sempre serão oportunos, já que o mesmo tem foco maior na legibilidade do código e proximidade com a "linguagem natural" do que com velocidade. 
+	\begin{itemize}
+  \item A significância dos testes foi alta, o que significa que o gerador é eficaz em gerar uma amostra da U(0,1).
+  \item Comentários sobre a baixa eficiência de implementação de quase todo algoritmo em R sempre serão oportunos, já que o mesmo tem foco maior na legibilidade do código e proximidade com a "linguagem natural" do que com velocidade. Como não foi pedido este tipo de análise do comando do trabalho, decidimos por não estender mais um ainda um trabalho que já ficou longo.
+\end{itemize}
+
+\subsection{Sobre o Gerador usando a Transformação Polar de Marsaglia para a Normal (0,1)}
+  \begin{itemize}
+  \item Importante notar que, como este Gerador utiliza o Gerador Congruencial para U(0,1) implementado aqui, era essencial que os Testes para ambos fossem significativos. E foram.
+  \item Foram implementadas duas versões do gerador: uma que utiliza as funções \textbf{sin()} e \textbf{cos()} do próprio R e outra que utiliza a Transformação de Marsaglia. Note que esta segunda é necessariamente mais eficiente que a primeira, já que o cálculo de funções trigonométricas tem um custo não-negligenciável\footnote{Para uma discussão mais substancial sobre o tema, ver \url{http://stackoverflow.com/q/2284860/4965975}}.
+\end{itemize}
+\subsection{Sobre a tabela de Densidades Acumuladas da Normal(0,1) utilizando Método de Integração de Monte Carlo}
+
+\begin{itemize}
+  \item Sob uma ótica qualitativa, entendemos que os resultados foram satisfatórios. Temos uma maioria de diferenças que têm ordem $10^{-6}$, com algumas excentricidades nos quantis a partir de 3, como as densidades acumuladas acima de 1 em 3.1, 3.6 e 3.7. Como estão acima de 1 mas espera-se de qualquer maneira que sejam muito próximas de 1, entendemos que isso não desabona o método.
+  \item Uma observação importante sobre a construção da tabela: para fins estéticos, foi utilizada a função \textbf{format()} do R para especificar o número de dígitos do resultado, o que resulta em aproximações. Para o percentil da acumulada (o valor da célula sem os parênteses), foi utilizado o parâmetro \textbf{digits = 6}, ou seja, o 7o dígito foi arredondado. Para os erros (valores entre parênteses na 2a linha da célula), o parâmetro digits teve valor 3, pois o entendimento foi que a ordem de grandeza dos erros era mais relevante que o seu valor em si.
+  \item O R utiliza uma implementação do pacote QUADPACK\cite{wiki:003} em C, que por sua vez é uma implementação da Quadratura da Fórmula da Quadratura de Gauss-Kronrod para Integração Numérica, inclusive para \textbf{pnorm()} e similares. A impressão de que a Integração via MC é mais simples que este método é muito clara.
+\end{itemize}
+
+\subsection{Sobre a tabela de Densidades Acumuladas da Normal(0,1) utilizando Transformação Polar de Marsaglia}
+\begin{itemize}
+  \item A implementação da Densidade Acumulada Empírica que foi utilizada para aproximar a Densidade Acumulada é, grosso modo, uma aplicação do Método de Rejeição. Isso resultou numa implementação fácil, mas diminui a robustez do procedimento quando o número de rejeições é muito baixo e há arredondamento.
+  \item Em tempo, a construção da tabela foi feita de maneira muito similar à utilizada na tabela usando o Método de Monte Carlo.
+  \item Ao contrário do Método de Monte Carlo, o Método Polar não resultou em percentis > 1, justamente pelo fato de ser uma implementação do Método de Rejeição.
+\end{itemize}
+
+
+	
+\bibliography{TP2-EstComp.bib}
+
+\section{Anexo A - Códigos das Implementações em R}
+Lembrete: repositório completo do Trabalho Prático, inclusive escrita do relatório, em \url{https://github.com/august-o/TP2-EstComp}
+
+\subsection{runif\_congruencial.R}
+
+Implementa o Gerador Congruencial da U(0,1). O objeto .Random.seed é um vetor aleatório gerado pelo R a cada execução do interpretador.
+\lstset{language=R,numbers=left,frame=single}
+\begin{lstlisting}
+runif_congruencial <- function(n = 1) {
+  a <- 62089911
+  m <- (2 ^ 31) - 1
+  x <- c(0)
+  y <- c(0)
+  x[1] <- 0
+  y[1] <- sample(.Random.seed[.Random.seed > 0], 1)
+  if (n == 1) {
+    y_0 <- y[1]
+    y[1] <- (a * y_0) %% m
+    x[1] = y[1] / m
+  }
+  else{
+    y_0 <- y[1]
+    y[1] <- (a * y_0) %% m
+    x[1] = y[1] / m
+    for (i in 2:n) {
+      y[i] <- (a * y[i - 1]) %% m
+      x[i] <- y[i] / m
+    }
+  }
+  return(x)
+}
+\end{lstlisting}
+
+\subsection{rnorm\_polar.R}
+Implementa o gerador usando o Método Polar para a N(0,1). \textbf{rnorm\_polarTrig()} utiliza \textbf{sin()} e \textbf{cos()}, enquanto \textbf{rnorm\_polarDireto()} utiliza as Transformações de Box-Muller/Marsaglia para um procedimento mais eficiente. Para fins de construção da tabela, foi utilizada a opção mais eficiente. 
+\begin{lstlisting}
+rnorm_polarTrig <- function(n = 1) {
+  resultado <- c()
+  i <- 1
+  while (i <= n) {
+    u1 <- runif_congruencial()
+    r2 <- -2 * log(u1)
+    u2 <- runif_congruencial()
+    theta <- 2 * pi * u2
+    x <- sqrt(r2) * cos(theta)
+    y <- sqrt(r2) * sin(theta)
+    resultado <- append(resultado, c(x, y))
+    i <- i + 1
+  }
+  return(resultado)
+}
+
+rnorm_polarDireto <- function(n=1){
+  X <- matrix(0, ncol = 2, nrow = n)
+  for (i in 1:n){
+    U <- runif(2)
+    V <- 2 * U - 1
+    R2 <- sum(V^2)
+    while (R2 > 1){
+      U <- runif(2)
+      V <- 2 * U - 1
+      R2 <- sum(V^2)
+    }
+    Y <- sqrt(-2 * log(R2) / R2)
+    X[i, ] <- Y * V
+  }
+  as.vector(X)
+}
+\end{lstlisting}
+
+\subsection{pnorm\_MC.R}
+Implementa o Método de Integração de Monte Carlo para obter uma aproximação para a Densidade Acumulada da N(0,1) na forma $P(0<Z<b)$. 
+
+\textbf{NOTA}: Como este código foi utilizado para redigir o trabalho, o retorno da função é uma lista com o valor encontrado para fda usando MC e caracteres especiais do Latex que auxiliaram na construção da tabela, seguido pela diferença entre o valor via MC e via pnorm() do R.
+
+\begin{lstlisting}
+pnorm_MC <- function(x, n = 10^6){
+  t <- runif(n)
+  fda <- numeric(length(x))
+  resultado <- list(length(x))
+  for(i in 1:length(x)){
+    g <- x[i]*exp(-0.5*(x[i]*t)^2)
+    fda[i] <- mean(g)/sqrt(2*pi) + 0.5
+    resultado[i] <- paste(format(fda[i],digits = 6),"
+    \newline(",format(fda[i]-pnorm(x),digits=3),")&",sep="")
+  }
+  return(resultado)
+}
+\end{lstlisting}
+
+\subsection{pnorm\_polar.R}
+Implementa uma aproximação para a Densidade Acumulada da N(0,1) utilizando Transformação Polar de Marsaglia e Método da Rejeição. Ver \textbf{NOTA} acima para explicação sobre o retorno da função.
+
+\begin{lstlisting}
+	pnorm_polar <- function(x,n=10^5){
+  resultado <- list(length(x))
+  fda <- numeric(length(x))
+  t <- rnorm_polarDireto(n)
+  mean(ifelse(t<x,1,0))
+  for(i in 1:length(x)){
+    fda[i] <- mean(ifelse(t<x[i],1,0))
+    resultado[i] <- paste(format(fda[i],digits = 6),
+    "\newline(",format(fda[i]-pnorm(x),digits=3),")&",sep="")
+  }
+  return(resultado)
+\end{lstlisting}
+
+
+
+
 \end{document}
